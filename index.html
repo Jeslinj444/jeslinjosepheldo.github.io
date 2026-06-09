@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeslin Joseph Eldo | Portfolio</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#030712;
+color:white;
+overflow-x:hidden;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,0.8);
+backdrop-filter:blur(10px);
+z-index:1000;
+}
+
+.logo{
+font-size:2rem;
+font-weight:bold;
+color:#00e5ff;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:25px;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+font-weight:600;
+transition:.3s;
+}
+
+nav a:hover{
+color:#00e5ff;
+}
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.profile-pic{
+width:260px;
+height:260px;
+border-radius:50%;
+object-fit:cover;
+object-position:center 15%;
+border:5px solid #00e5ff;
+box-shadow:0 0 40px #00e5ff;
+margin-bottom:25px;
+transition:.3s;
+}
+
+.profile-pic:hover{
+transform:scale(1.05);
+}
+
+.hero h1{
+font-size:5rem;
+color:#00e5ff;
+text-shadow:0 0 20px #00e5ff;
+}
+
+.hero h3{
+color:#00ff88;
+margin-top:10px;
+font-size:1.5rem;
+}
+
+.hero p{
+margin-top:20px;
+max-width:700px;
+font-size:1.1rem;
+}
+
+.btn{
+display:inline-block;
+margin-top:20px;
+padding:14px 28px;
+background:#00e5ff;
+color:black;
+font-weight:bold;
+border-radius:8px;
+text-decoration:none;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+box-shadow:0 0 20px #00e5ff;
+}
+
+section{
+padding:100px 10%;
+}
+
+.section-title{
+font-size:2.5rem;
+color:#00e5ff;
+margin-bottom:30px;
+text-align:center;
+}
+
+.card{
+background:rgba(17,24,39,0.8);
+padding:25px;
+border-radius:15px;
+margin-bottom:25px;
+backdrop-filter:blur(10px);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 20px rgba(0,229,255,.5);
+}
+
+.skills-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.skill{
+background:#111827;
+padding:20px;
+border-radius:10px;
+}
+
+.bar{
+height:18px;
+background:#333;
+border-radius:20px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.fill{
+height:100%;
+background:#00ff88;
+}
+
+.project{
+margin-top:15px;
+}
+
+.project h3{
+color:#00ff88;
+}
+
+.contact{
+text-align:center;
+}
+
+footer{
+background:#111827;
+text-align:center;
+padding:20px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:2.7rem;
+}
+
+.profile-pic{
+width:180px;
+height:180px;
+}
+
+nav{
+padding:15px;
+}
+
+nav ul{
+gap:12px;
+font-size:14px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<nav>
+<div class="logo">TZOUR</div>
+
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<section class="hero">
+
+<img src="selfiephoto.jpeg" class="profile-pic">
+
+<h1>Jeslin Joseph Eldo</h1>
+
+<h3>Mechatronics • Cybersecurity • Electronics</h3>
+
+<p>
+Technology enthusiast passionate about Robotics,
+Cybersecurity, IoT, ESP32 Development and Artificial Intelligence.
+Building practical engineering solutions through innovation.
+</p>
+
+<a href="#projects" class="btn">View Projects</a>
+
+</section>
+
+<section id="about">
+
+<h2 class="section-title">About Me</h2>
+
+<div class="card">
+I am Jeslin Joseph Eldo. My interests include Mechatronics Engineering,
+Cybersecurity, Robotics, Embedded Systems, Electronics, IoT and AI.
+I enjoy creating innovative projects using ESP32, Arduino and Python.
+My goal is to build impactful technology solutions and grow as an engineer.
+</div>
+
+</section>
+
+<section id="skills">
+
+<h2 class="section-title">Skills</h2>
+
+<div class="skills-grid">
+
+<div class="skill">
+Python
+<div class="bar">
+<div class="fill" style="width:80%"></div>
+</div>
+</div>
+
+<div class="skill">
+ESP32 & Arduino
+<div class="bar">
+<div class="fill" style="width:90%"></div>
+</div>
+</div>
+
+<div class="skill">
+Cybersecurity
+<div class="bar">
+<div class="fill" style="width:75%"></div>
+</div>
+</div>
+
+<div class="skill">
+Electronics
+<div class="bar">
+<div class="fill" style="width:85%"></div>
+</div>
+</div>
+
+<div class="skill">
+IoT Development
+<div class="bar">
+<div class="fill" style="width:88%"></div>
+</div>
+</div>
+
+<div class="skill">
+Robotics
+<div class="bar">
+<div class="fill" style="width:82%"></div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="projects">
+
+<h2 class="section-title">Projects</h2>
+
+<div class="card project">
+<h3>Auxiliator Smart Farming System</h3>
+<p>IoT farming automation system using ESP32 and sensors.</p>
+</div>
+
+<div class="card project">
+<h3>TZOUR Assistant</h3>
+<p>Personal AI assistant built using Python.</p>
+</div>
+
+<div class="card project">
+<h3>ESP32 Weather Station</h3>
+<p>Weather monitoring system using DHT22 and OLED display.</p>
+</div>
+
+<div class="card project">
+<h3>TZOUR H 1 Mini</h3>
+<p>ESP32 wireless security research project.</p>
+</div>
+
+<div class="card project">
+<h3>TZOUR H 2 Mini</h3>
+<p>OLED-integrated ESP32 development platform.</p>
+</div>
+
+</section>
+
+<section id="contact">
+
+<h2 class="section-title">Contact</h2>
+
+<div class="card contact">
+
+<p>📧 Email: your-email@example.com</p>
+<br>
+
+<p>💻 GitHub: Jeslinj444</p>
+<br>
+
+<p>📍 Kerala, India</p>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 Jeslin Joseph Eldo | TZOUR Portfolio
+</footer>
+
+<script>
+const canvas=document.getElementById('bg');
+const ctx=canvas.getContext('2d');
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<180;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+dx:(Math.random()-0.5),
+dy:(Math.random()-0.5)
+});
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach(p=>{
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle="#00e5ff";
+ctx.fill();
+
+p.x+=p.dx;
+p.y+=p.dy;
+
+if(p.x<0||p.x>canvas.width)p.dx*=-1;
+if(p.y<0||p.y>canvas.height)p.dy*=-1;
+
+});
+
+requestAnimationFrame(animate);
+}
+
+animate();
+
+window.addEventListener('resize',()=>{
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+});
+</script>
+
+</body>
+</html>
