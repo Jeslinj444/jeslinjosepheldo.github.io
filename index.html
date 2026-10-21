@@ -9,19 +9,31 @@
   <title>Bible Quiz Results | Students Movement, Morrakkala</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
+<body>
   <!-- Cover banner -->
   <header class="hero">
-    <img class="cover-image" src="images/cover.jpg"
-         alt="Bible Quiz cover" onerror="this.style.display='none'">
+    <img
+      class="cover-image"
+      src="cover.jpg"
+      alt="Bible Quiz cover"
+      onerror="this.style.display='none'"
+    >
     <div class="hero-overlay"></div>
 
-    <!-- Click the logo to open admin login (no visible hint) -->
-    <button id="logo-button" class="logo-button"
-            type="button" aria-label="Admin login">
-      <img src="images/logo.png" alt="Church logo"
-           onerror="this.style.display='none'">
+    <!-- Private admin access through the logo -->
+    <button
+      id="logo-button"
+      class="logo-button"
+      type="button"
+      aria-label="Admin login"
+      title=""
+    >
+      <img
+        src="logo.png"
+        alt="Church logo"
+        onerror="this.style.display='none'"
+      >
       <span class="logo-fallback">✝</span>
     </button>
 
@@ -30,7 +42,9 @@
       <p class="hero-subtitle">
         Students Movement of St. Mary's Jacobite Church, Morrakkala
       </p>
-      <p class="hero-tagline">Know the Word &nbsp; | &nbsp; Grow in Faith &nbsp; | &nbsp; Build Together</p>
+      <p class="hero-tagline">
+        Know the Word &nbsp; | &nbsp; Grow in Faith &nbsp; | &nbsp; Build Together
+      </p>
     </div>
   </header>
 
@@ -84,27 +98,43 @@
       <p>Philippians 4:13</p>
     </section>
 
-    <!-- Admin login -->
+    <!-- Administrator login -->
     <section id="login-section" class="card" hidden>
       <h2>🔐 Administrator Login</h2>
-      <p class="muted">Sign in with the authorized quiz administrator account.</p>
+      <p class="muted">
+        Sign in with the authorized quiz administrator account.
+      </p>
 
       <form id="login-form">
         <div>
           <label for="admin-email">Email address</label>
-          <input id="admin-email" type="email" autocomplete="username"
-                 placeholder="Enter admin email" required>
+          <input
+            id="admin-email"
+            type="email"
+            autocomplete="username"
+            placeholder="Enter admin email"
+            required
+          >
         </div>
 
         <div>
           <label for="admin-password">Password</label>
-          <input id="admin-password" type="password"
-                 autocomplete="current-password"
-                 placeholder="Enter password" required>
+          <input
+            id="admin-password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Enter password"
+            required
+          >
         </div>
 
         <button id="login-button" type="submit">Log In</button>
-        <button id="close-login-button" type="button" class="button secondary">
+
+        <button
+          id="close-login-button"
+          type="button"
+          class="button secondary"
+        >
           Cancel
         </button>
       </form>
@@ -112,79 +142,160 @@
       <p id="login-message" class="admin-message" aria-live="polite"></p>
     </section>
 
-    <!-- Admin dashboard -->
+    <!-- Professional admin dashboard -->
     <section id="admin-section" class="card" hidden>
+
       <div class="section-heading admin-title">
         <div>
-          <h2>⚙️ Quiz Administration</h2>
-          <p class="muted">Manage teams, rounds, and scores.</p>
+          <p class="eyebrow">ADMINISTRATION PANEL</p>
+          <h2>⚙️ Quiz Control Center</h2>
+          <p class="muted">
+            Manage your competition, teams, rounds, and results in one place.
+          </p>
         </div>
-        <button id="logout-button" type="button" class="button danger">
+
+        <button
+          id="logout-button"
+          type="button"
+          class="button danger"
+        >
           Log Out
         </button>
       </div>
 
       <p id="admin-message" class="admin-message" aria-live="polite"></p>
 
-      <div class="admin-grid">
-        <!-- Team management -->
+      <!-- Dashboard navigation -->
+      <nav class="admin-navigation" aria-label="Admin sections">
+        <a href="#team-management">👥 Teams</a>
+        <a href="#round-management">📚 Rounds</a>
+        <a href="#score-management">📝 Score Entry</a>
+      </nav>
+
+      <!-- Management overview -->
+      <section class="admin-overview">
         <div class="admin-card">
-          <h3>👥 Manage Teams</h3>
-
-          <form id="add-team-form">
-            <input id="new-team-name" type="text"
-                   placeholder="Enter team name"
-                   maxlength="80" required>
-            <button type="submit" class="button">+ Add Team</button>
-          </form>
-
-          <div id="admin-team-list" class="manage-list">
-            <p class="empty">No teams added yet.</p>
-          </div>
+          <span class="heading-icon">👥</span>
+          <h3>Team Management</h3>
+          <p class="muted">
+            Add teams and manage participating groups.
+          </p>
         </div>
 
-        <!-- Round management -->
         <div class="admin-card">
-          <h3>📚 Manage Rounds</h3>
-          <p class="muted">Use the + button below to create rounds. Rename rounds in the score table.</p>
-
-          <div id="admin-round-list" class="manage-list">
-            <p class="empty">No rounds added yet.</p>
-          </div>
+          <span class="heading-icon">📚</span>
+          <h3>Round Management</h3>
+          <p class="muted">
+            Create rounds and organize your quiz structure.
+          </p>
         </div>
-      </div>
+
+        <div class="admin-card">
+          <span class="heading-icon">📊</span>
+          <h3>Score Management</h3>
+          <p class="muted">
+            Enter scores and update the leaderboard.
+          </p>
+        </div>
+      </section>
+
+      <!-- Team management -->
+      <section id="team-management" class="admin-card admin-block">
+        <h3>👥 Manage Teams</h3>
+        <p class="muted">
+          Add a team or manage the teams already registered.
+        </p>
+
+        <form id="add-team-form">
+          <label for="new-team-name">New team name</label>
+          <input
+            id="new-team-name"
+            type="text"
+            placeholder="Enter team name"
+            maxlength="80"
+            required
+          >
+
+          <button type="submit" class="button">
+            + Add Team
+          </button>
+        </form>
+
+        <div id="admin-team-list" class="manage-list">
+          <p class="empty">Loading teams...</p>
+        </div>
+      </section>
+
+      <!-- Round management -->
+      <section id="round-management" class="admin-card admin-block">
+        <div class="section-heading">
+          <div>
+            <h3>📚 Manage Quiz Rounds</h3>
+            <p class="muted">
+              Review and manage your quiz rounds.
+            </p>
+          </div>
+
+          <button
+            id="add-round-button"
+            class="add-round-icon"
+            type="button"
+            title="Add a round"
+            aria-label="Add a round"
+          >+</button>
+        </div>
+
+        <p class="muted">
+          Add or remove rounds using the controls. Edit round names in the
+          score table if supported by your current script.
+        </p>
+
+        <div id="admin-round-list" class="manage-list">
+          <p class="empty">Loading rounds...</p>
+        </div>
+      </section>
 
       <!-- Score entry -->
-      <div class="score-heading">
-        <div>
-          <h2>📝 Enter Team Scores</h2>
-          <p class="muted">Edit round names, enter scores, and save your changes.</p>
+      <section id="score-management" class="admin-card admin-block">
+        <div class="score-heading">
+          <div>
+            <h2>📝 Enter Team Scores</h2>
+            <p class="muted">
+              Enter each team's score for each quiz round.
+              Save your changes when finished.
+            </p>
+          </div>
         </div>
 
-        <button id="add-round-button" class="add-round-icon"
-                type="button" title="Add a round"
-                aria-label="Add a round">+</button>
-      </div>
+        <div id="score-editor">
+          <p class="empty">Loading score editor...</p>
+        </div>
 
-      <div id="score-editor">
-        <p class="empty">Add a round to begin.</p>
-      </div>
+        <button
+          id="save-scores-button"
+          type="button"
+        >
+          Save All Scores
+        </button>
+      </section>
 
-      <button id="save-scores-button" type="button">
-        Save All Scores
-      </button>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© <span id="current-year">2026</span> Students Movement of St. Mary's Jacobite Church, Morrakkala</p>
+    <p>
+      © <span id="current-year">2026</span>
+      Students Movement of St. Mary's Jacobite Church, Morrakkala
+    </p>
     <p>Bible Quiz Results · Know the Word · Grow in Faith</p>
   </footer>
 
   <script>
-    document.getElementById("current-year").textContent = new Date().getFullYear();
+    document.getElementById("current-year").textContent =
+      new Date().getFullYear();
   </script>
+
+  <!-- Existing Firebase authentication and database functionality -->
   <script type="module" src="script.js"></script>
 </body>
 </html>
-
