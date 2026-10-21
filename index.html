@@ -8,32 +8,63 @@
   <meta name="description" content="Bible Quiz Results — Students Movement of St. Mary's Jacobite Church, Morrakkala.">
   <title>Bible Quiz Results | Students Movement, Morrakkala</title>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Floating fullscreen button */
+    #fullscreen-button {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 9999;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 50%;
+      background: #312e81;
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(0,0,0,.25);
+      font-size: 23px;
+      line-height: 1;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    #fullscreen-button:hover {
+      background: #4338ca;
+      transform: scale(1.08);
+    }
+
+    #fullscreen-button:focus-visible {
+      outline: 3px solid #a5b4fc;
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 600px) {
+      #fullscreen-button {
+        right: 14px;
+        bottom: 14px;
+        width: 44px;
+        height: 44px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+
   <!-- Cover banner -->
   <header class="hero">
-    <img
-      class="cover-image"
-      src="cover.jpg"
-      alt="Bible Quiz cover"
-      onerror="this.style.display='none'"
-    >
+    <img class="cover-image" src="cover.jpg"
+         alt="Bible Quiz cover" onerror="this.style.display='none'">
     <div class="hero-overlay"></div>
 
-    <!-- Private admin access through the logo -->
-    <button
-      id="logo-button"
-      class="logo-button"
-      type="button"
-      aria-label="Admin login"
-      title=""
-    >
-      <img
-        src="logo.png"
-        alt="Church logo"
-        onerror="this.style.display='none'"
-      >
+    <!-- Click the logo to open admin login -->
+    <button id="logo-button" class="logo-button"
+            type="button" aria-label="Admin login">
+      <img src="logo.png" alt="Church logo"
+           onerror="this.style.display='none'">
       <span class="logo-fallback">✝</span>
     </button>
 
@@ -42,9 +73,7 @@
       <p class="hero-subtitle">
         Students Movement of St. Mary's Jacobite Church, Morrakkala
       </p>
-      <p class="hero-tagline">
-        Know the Word &nbsp; | &nbsp; Grow in Faith &nbsp; | &nbsp; Build Together
-      </p>
+      <p class="hero-tagline">Know the Word &nbsp; | &nbsp; Grow in Faith &nbsp; | &nbsp; Build Together</p>
     </div>
   </header>
 
@@ -98,43 +127,27 @@
       <p>Philippians 4:13</p>
     </section>
 
-    <!-- Administrator login -->
+    <!-- Admin login -->
     <section id="login-section" class="card" hidden>
       <h2>🔐 Administrator Login</h2>
-      <p class="muted">
-        Sign in with the authorized quiz administrator account.
-      </p>
+      <p class="muted">Sign in with the authorized quiz administrator account.</p>
 
       <form id="login-form">
         <div>
           <label for="admin-email">Email address</label>
-          <input
-            id="admin-email"
-            type="email"
-            autocomplete="username"
-            placeholder="Enter admin email"
-            required
-          >
+          <input id="admin-email" type="email" autocomplete="username"
+                 placeholder="Enter admin email" required>
         </div>
 
         <div>
           <label for="admin-password">Password</label>
-          <input
-            id="admin-password"
-            type="password"
-            autocomplete="current-password"
-            placeholder="Enter password"
-            required
-          >
+          <input id="admin-password" type="password"
+                 autocomplete="current-password"
+                 placeholder="Enter password" required>
         </div>
 
         <button id="login-button" type="submit">Log In</button>
-
-        <button
-          id="close-login-button"
-          type="button"
-          class="button secondary"
-        >
+        <button id="close-login-button" type="button" class="button secondary">
           Cancel
         </button>
       </form>
@@ -142,160 +155,122 @@
       <p id="login-message" class="admin-message" aria-live="polite"></p>
     </section>
 
-    <!-- Professional admin dashboard -->
+    <!-- Admin dashboard -->
     <section id="admin-section" class="card" hidden>
-
       <div class="section-heading admin-title">
         <div>
-          <p class="eyebrow">ADMINISTRATION PANEL</p>
-          <h2>⚙️ Quiz Control Center</h2>
-          <p class="muted">
-            Manage your competition, teams, rounds, and results in one place.
-          </p>
+          <h2>⚙️ Quiz Administration</h2>
+          <p class="muted">Manage teams, rounds, and scores.</p>
         </div>
-
-        <button
-          id="logout-button"
-          type="button"
-          class="button danger"
-        >
+        <button id="logout-button" type="button" class="button danger">
           Log Out
         </button>
       </div>
 
       <p id="admin-message" class="admin-message" aria-live="polite"></p>
 
-      <!-- Dashboard navigation -->
-      <nav class="admin-navigation" aria-label="Admin sections">
-        <a href="#team-management">👥 Teams</a>
-        <a href="#round-management">📚 Rounds</a>
-        <a href="#score-management">📝 Score Entry</a>
-      </nav>
+      <div class="admin-grid">
 
-      <!-- Management overview -->
-      <section class="admin-overview">
+        <!-- Team management -->
         <div class="admin-card">
-          <span class="heading-icon">👥</span>
-          <h3>Team Management</h3>
-          <p class="muted">
-            Add teams and manage participating groups.
-          </p>
-        </div>
+          <h3>👥 Manage Teams</h3>
 
-        <div class="admin-card">
-          <span class="heading-icon">📚</span>
-          <h3>Round Management</h3>
-          <p class="muted">
-            Create rounds and organize your quiz structure.
-          </p>
-        </div>
+          <form id="add-team-form">
+            <input id="new-team-name" type="text"
+                   placeholder="Enter team name"
+                   maxlength="80" required>
+            <button type="submit" class="button">+ Add Team</button>
+          </form>
 
-        <div class="admin-card">
-          <span class="heading-icon">📊</span>
-          <h3>Score Management</h3>
-          <p class="muted">
-            Enter scores and update the leaderboard.
-          </p>
-        </div>
-      </section>
-
-      <!-- Team management -->
-      <section id="team-management" class="admin-card admin-block">
-        <h3>👥 Manage Teams</h3>
-        <p class="muted">
-          Add a team or manage the teams already registered.
-        </p>
-
-        <form id="add-team-form">
-          <label for="new-team-name">New team name</label>
-          <input
-            id="new-team-name"
-            type="text"
-            placeholder="Enter team name"
-            maxlength="80"
-            required
-          >
-
-          <button type="submit" class="button">
-            + Add Team
-          </button>
-        </form>
-
-        <div id="admin-team-list" class="manage-list">
-          <p class="empty">Loading teams...</p>
-        </div>
-      </section>
-
-      <!-- Round management -->
-      <section id="round-management" class="admin-card admin-block">
-        <div class="section-heading">
-          <div>
-            <h3>📚 Manage Quiz Rounds</h3>
-            <p class="muted">
-              Review and manage your quiz rounds.
-            </p>
+          <div id="admin-team-list" class="manage-list">
+            <p class="empty">No teams added yet.</p>
           </div>
-
-          <button
-            id="add-round-button"
-            class="add-round-icon"
-            type="button"
-            title="Add a round"
-            aria-label="Add a round"
-          >+</button>
         </div>
 
-        <p class="muted">
-          Add or remove rounds using the controls. Edit round names in the
-          score table if supported by your current script.
-        </p>
+        <!-- Round management -->
+        <div class="admin-card">
+          <h3>📚 Manage Rounds</h3>
+          <p class="muted">Use the + button below to create rounds. Rename rounds in the score table.</p>
 
-        <div id="admin-round-list" class="manage-list">
-          <p class="empty">Loading rounds...</p>
+          <div id="admin-round-list" class="manage-list">
+            <p class="empty">No rounds added yet.</p>
+          </div>
         </div>
-      </section>
+      </div>
 
       <!-- Score entry -->
-      <section id="score-management" class="admin-card admin-block">
-        <div class="score-heading">
-          <div>
-            <h2>📝 Enter Team Scores</h2>
-            <p class="muted">
-              Enter each team's score for each quiz round.
-              Save your changes when finished.
-            </p>
-          </div>
+      <div class="score-heading">
+        <div>
+          <h2>📝 Enter Team Scores</h2>
+          <p class="muted">Edit round names, enter scores, and save your changes.</p>
         </div>
 
-        <div id="score-editor">
-          <p class="empty">Loading score editor...</p>
-        </div>
+        <button id="add-round-button" class="add-round-icon"
+                type="button" title="Add a round"
+                aria-label="Add a round">+</button>
+      </div>
 
-        <button
-          id="save-scores-button"
-          type="button"
-        >
-          Save All Scores
-        </button>
-      </section>
+      <div id="score-editor">
+        <p class="empty">Add a round to begin.</p>
+      </div>
 
+      <button id="save-scores-button" type="button">
+        Save All Scores
+      </button>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>
-      © <span id="current-year">2026</span>
-      Students Movement of St. Mary's Jacobite Church, Morrakkala
-    </p>
+    <p>© <span id="current-year">2026</span> Students Movement of St. Mary's Jacobite Church, Morrakkala</p>
     <p>Bible Quiz Results · Know the Word · Grow in Faith</p>
   </footer>
+
+  <!-- Floating fullscreen toggle -->
+  <button
+    id="fullscreen-button"
+    type="button"
+    aria-label="Enter fullscreen"
+    title="Enter fullscreen"
+  >⛶</button>
 
   <script>
     document.getElementById("current-year").textContent =
       new Date().getFullYear();
+
+    const fullscreenButton = document.getElementById("fullscreen-button");
+
+    function updateFullscreenButton() {
+      const isFullscreen = Boolean(document.fullscreenElement);
+
+      fullscreenButton.textContent = isFullscreen ? "×" : "⛶";
+      fullscreenButton.setAttribute(
+        "aria-label",
+        isFullscreen ? "Exit fullscreen" : "Enter fullscreen"
+      );
+      fullscreenButton.title = isFullscreen
+        ? "Exit fullscreen (Esc)"
+        : "Enter fullscreen";
+    }
+
+    fullscreenButton.addEventListener("click", async () => {
+      try {
+        if (!document.fullscreenElement) {
+          await document.documentElement.requestFullscreen();
+        } else {
+          await document.exitFullscreen();
+        }
+      } catch (error) {
+        console.error("Fullscreen operation failed:", error);
+      }
+    });
+
+    document.addEventListener("fullscreenchange", updateFullscreenButton);
+
+    // Browsers automatically exit fullscreen when the user presses Esc.
+    // Update the floating button when that happens.
+    updateFullscreenButton();
   </script>
 
-  <!-- Existing Firebase authentication and database functionality -->
   <script type="module" src="script.js"></script>
 </body>
 </html>
