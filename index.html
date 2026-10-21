@@ -5,8 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#101827">
+
   <title>Bible Quiz Results | Students Movement</title>
-  <meta name="description" content="Bible Quiz Results and Leaderboard of Students Movement of St. Mary's Jacobite Church, Morrakkala.">
+
+  <meta
+    name="description"
+    content="Bible Quiz Results of Students Movement of St. Mary's Jacobite Church, Morrakkala."
+  >
+
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -21,16 +27,17 @@
 
     <div class="hero-overlay"></div>
 
+    <!-- Private administrator access: no visible login hint -->
     <button
       type="button"
       class="logo-button"
       id="logo-button"
-      aria-label="Open administrator login"
-      title="Administrator login"
+      aria-label="Administrator"
+      title=""
     >
       <img
         src="images/logo.png"
-        alt="Students Movement logo"
+        alt="Students Movement"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'"
       >
       <span class="logo-fallback" style="display:none">SM</span>
@@ -38,7 +45,9 @@
 
     <div class="hero-content">
       <p class="eyebrow">STUDENTS MOVEMENT</p>
+
       <h1>Bible Quiz Results</h1>
+
       <p class="subtitle">
         Students Movement of St. Mary's Jacobite Church, Morrakkala
       </p>
@@ -46,6 +55,7 @@
   </header>
 
   <main class="container">
+
     <section class="verse-card">
       <p class="verse">
         “Your word is a lamp to my feet and a light to my path.”
@@ -57,7 +67,9 @@
       <div>
         <p class="eyebrow">COMPETITION RESULTS</p>
         <h2>🏆 Leaderboard</h2>
-        <p class="muted">Check the latest team rankings and scores.</p>
+        <p class="muted">
+          Check the latest team rankings and scores.
+        </p>
       </div>
 
       <div class="team-count-card">
@@ -80,6 +92,7 @@
               <th>Total Score</th>
             </tr>
           </thead>
+
           <tbody id="leaderboard-body">
             <tr>
               <td colspan="3">Loading results...</td>
@@ -94,7 +107,9 @@
         <div>
           <p class="eyebrow">ROUND-WISE PERFORMANCE</p>
           <h2>Quiz Round Results</h2>
-          <p class="muted">Explore the scores for each round.</p>
+          <p class="muted">
+            Explore the scores for each round.
+          </p>
         </div>
       </div>
 
@@ -103,13 +118,16 @@
       </div>
     </section>
 
+    <!-- Administrator login -->
     <section id="login-section" class="login-section" hidden>
       <div class="panel">
         <div class="panel-heading">
           <div>
             <p class="eyebrow">RESTRICTED ACCESS</p>
             <h2>Administrator Login</h2>
-            <p class="muted">Sign in to manage quiz results.</p>
+            <p class="muted">
+              Sign in to manage quiz results.
+            </p>
           </div>
 
           <button
@@ -122,6 +140,7 @@
 
         <form id="login-form">
           <label for="admin-email">Email address</label>
+
           <input
             type="email"
             id="admin-email"
@@ -132,6 +151,7 @@
           >
 
           <label for="admin-password">Password</label>
+
           <input
             type="password"
             id="admin-password"
@@ -141,30 +161,49 @@
             required
           >
 
-          <button type="submit" id="login-button" class="primary-button">
+          <button
+            type="submit"
+            id="login-button"
+            class="primary-button"
+          >
             Log In
           </button>
 
-          <p id="login-message" class="form-message" role="status"></p>
+          <p
+            id="login-message"
+            class="form-message"
+            role="status"
+          ></p>
         </form>
       </div>
     </section>
 
+    <!-- Administrator dashboard -->
     <section id="admin-section" class="admin-section" hidden>
       <div class="panel">
         <div class="panel-heading">
           <div>
             <p class="eyebrow">CONTROL PANEL</p>
             <h2>Administrator Dashboard</h2>
-            <p class="muted">Manage teams, rounds, and scores.</p>
+            <p class="muted">
+              Manage teams, rounds, and scores.
+            </p>
           </div>
 
-          <button type="button" id="logout-button" class="secondary-button">
+          <button
+            type="button"
+            id="logout-button"
+            class="secondary-button"
+          >
             Log Out
           </button>
         </div>
 
-        <p id="admin-message" class="form-message" role="status"></p>
+        <p
+          id="admin-message"
+          class="form-message"
+          role="status"
+        ></p>
 
         <section class="admin-block">
           <h3>Add a Team</h3>
@@ -177,6 +216,7 @@
               maxlength="100"
               required
             >
+
             <button type="submit" class="primary-button">
               Add Team
             </button>
@@ -189,10 +229,16 @@
           <div class="admin-block-heading">
             <div>
               <h3>Manage Rounds</h3>
-              <p class="muted">Add or remove quiz rounds.</p>
+              <p class="muted">
+                Add or remove quiz rounds.
+              </p>
             </div>
 
-            <button type="button" id="add-round-button" class="secondary-button">
+            <button
+              type="button"
+              id="add-round-button"
+              class="secondary-button"
+            >
               + Add Round
             </button>
           </div>
@@ -202,6 +248,7 @@
 
         <section class="admin-block">
           <h3>Edit Scores</h3>
+
           <p class="muted">
             Enter each team's score for each round, then save your changes.
           </p>
@@ -214,6 +261,7 @@
                   <th>Scores</th>
                 </tr>
               </thead>
+
               <tbody>
                 <tr>
                   <td colspan="2">Loading score editor...</td>
@@ -232,35 +280,27 @@
         </section>
       </div>
     </section>
+
   </main>
 
   <footer class="site-footer">
-    <p>Students Movement · St. Mary's Jacobite Church, Morrakkala</p>
-    <p>© <span id="current-year"></span> Bible Quiz Results</p>
+    <p>
+      Students Movement · St. Mary's Jacobite Church, Morrakkala
+    </p>
+
+    <p>
+      © <span id="current-year"></span> Bible Quiz Results
+    </p>
   </footer>
 
   <script>
     document.getElementById("current-year").textContent =
       new Date().getFullYear();
-
-    // Keep the logo clickable without displaying an arrow or login hint.
-    document.getElementById("logo-button").addEventListener("click", () => {
-      const loginSection = document.getElementById("login-section");
-      const adminSection = document.getElementById("admin-section");
-
-      if (!adminSection.hidden) {
-        adminSection.hidden = true;
-      } else {
-        loginSection.hidden = !loginSection.hidden;
-      }
-    });
-
-    document.getElementById("close-login-button").addEventListener("click", () => {
-      document.getElementById("login-section").hidden = true;
-    });
   </script>
 
+  <!-- Keep your existing Firebase application logic -->
   <script type="module" src="script.js"></script>
 </body>
 </html>
+
 
