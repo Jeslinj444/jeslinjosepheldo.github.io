@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bible Quiz Championship | Live Leaderboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="app-header">
+    <div class="header-container">
+      <button id="logo-btn" class="logo-btn" type="button" aria-label="Administrator Menu" title="Admin Login (or toggle auto-scroll in Fullscreen)">
+        <img src="logo.png" alt="Church Logo" class="logo-img" id="app-logo">
+      </button>
+      <div class="header-titles">
+        <h1 class="header-title">Grand Bible Quiz Championship</h1>
+        <p class="header-subtitle">Official Live Standings & Round Scorecard</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Church Program Top Banner Image -->
+  <div class="banner-wrapper">
+    <img src="cover.jpg" alt="Event Cover Banner" class="cover-banner-img">
+  </div>
+
+  <!-- Scripture Verse Header Card -->
+  <div class="scripture-container">
+    <div class="scripture-card">
+      <p class="scripture-quote">“Your word is a lamp to my feet and a light to my path.”</p>
+      <span class="scripture-ref">— Psalm 119:105</span>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- Overall Standings -->
+    <section class="card">
+      <div class="card-header">
+        <div>
+          <h2>Overall Leaderboard</h2>
+          <p class="text-muted">Live cumulative standings updated in real time</p>
+        </div>
+        <span id="team-counter" class="badge">0 Teams</span>
+      </div>
+      <div class="table-responsive">
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th style="width: 80px;">Rank</th>
+              <th>Team Name</th>
+              <th style="text-align: right; width: 140px;">Total Score</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body">
+            <tr><td colspan="3" class="state-cell">Connecting to live tournament data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Round-Wise Results (Straight Down Table Layout) -->
+    <section class="card">
+      <div class="card-header">
+        <div>
+          <h2>Round-by-Round Scorecard</h2>
+          <p class="text-muted">Stage performance breakdown sorted straight down</p>
+        </div>
+      </div>
+      <div id="round-results-container" class="rounds-vertical-stack">
+        <p class="state-cell">Awaiting round definitions...</p>
+      </div>
+    </section>
+
+    <!-- Administrator Login Modal -->
+    <section id="login-modal" class="card admin-modal" hidden>
+      <div class="card-header">
+        <h2>Administrator Sign In</h2>
+        <button id="close-login-btn" class="close-btn" type="button" aria-label="Close">×</button>
+      </div>
+      <form id="admin-login-form" class="form-vertical">
+        <div class="form-group">
+          <label for="admin-email">Admin Email</label>
+          <input type="email" id="admin-email" placeholder="admin@domain.com" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="admin-password">Password</label>
+          <input type="password" id="admin-password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary">Authenticate</button>
+        <div id="login-status" class="alert-box" hidden></div>
+      </form>
+    </section>
+
+    <!-- Control Center (Admin Only) -->
+    <section id="admin-panel" class="card" hidden>
+      <div class="card-header">
+        <div>
+          <span class="eyebrow">CONTROL CENTER</span>
+          <h2>Tournament Administration</h2>
+        </div>
+        <button id="logout-btn" class="btn btn-danger" type="button">Sign Out</button>
+      </div>
+      <div id="admin-status" class="alert-box" hidden></div>
+      
+      <div class="admin-controls-grid">
+        <div class="control-box">
+          <h3>Register New Team</h3>
+          <form id="add-team-form" class="inline-form">
+            <input type="text" id="new-team-name" placeholder="Team name" required maxlength="60">
+            <button type="submit" class="btn btn-primary">+ Add</button>
+          </form>
+          <div id="admin-teams-list" class="item-list"></div>
+        </div>
+
+        <div class="control-box">
+          <h3>Create Quiz Round</h3>
+          <form id="add-round-form" class="inline-form">
+            <input type="text" id="new-round-name" placeholder="e.g. Round 1: Gospels" required maxlength="60">
+            <button type="submit" class="btn btn-primary">+ Add</button>
+          </form>
+          <div id="admin-rounds-list" class="item-list"></div>
+        </div>
+      </div>
+
+      <div class="control-box" style="margin-top: 24px;">
+        <h3>Update Team Scores</h3>
+        <p class="text-muted">Select a team and modify stage scores:</p>
+        <select id="score-team-select" style="margin-top: 10px;">
+          <option value="">-- Choose Registered Team --</option>
+        </select>
+        <div id="score-inputs-container" class="score-inputs-wrapper"></div>
+        <button type="button" id="save-scores-btn" class="btn btn-success" style="margin-top: 14px;" disabled>Commit Scores to Live Board</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Fullscreen Toggle Floating Button -->
+  <button id="fullscreen-toggle-btn" class="fullscreen-fab" type="button" title="Toggle Fullscreen Projector Mode (Esc to exit)">⛶</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
