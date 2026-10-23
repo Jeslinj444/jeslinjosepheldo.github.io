@@ -6,7 +6,7 @@
   <title>Bible Quiz Championship | Official Live Scoreboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Manjari:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -19,15 +19,16 @@
       </button>
       <div class="header-titles">
         <div class="live-pill">
-          <span class="pulse-dot"></span> LIVE TOURNAMENT BOARD
+          <span class="pulse-dot"></span> <span id="board-mode-label">LIVE TOURNAMENT BOARD</span>
         </div>
         <h1 class="header-title">Grand Bible Quiz Championship</h1>
       </div>
     </div>
 
+    <!-- Malayalam Scripture Bar -->
     <div class="scripture-bar">
-      <p class="scripture-quote">“Your word is a lamp to my feet and a light to my path.”</p>
-      <span class="scripture-ref">Psalm 119:105</span>
+      <p class="scripture-quote">“നിന്റെ വചനം എന്റെ കാലുകൾക്കു ദീപവും എന്റെ പാതയ്ക്കു പ്രകാശവും ആകുന്നു.”</p>
+      <span class="scripture-ref">— സങ്കീർത്തനങ്ങൾ 119:105</span>
     </div>
 
     <div class="header-right">
@@ -35,7 +36,7 @@
         <span class="stat-label">TEAMS</span>
         <span id="team-counter" class="stat-val">0</span>
       </div>
-      <button id="fullscreen-toggle-btn" class="btn btn-primary" type="button" title="Projector Fullscreen (Esc to exit)">
+      <button id="fullscreen-toggle-btn" class="btn btn-primary" type="button" title="Projector Fullscreen">
         ⛶ Fullscreen
       </button>
     </div>
@@ -48,7 +49,7 @@
         <table class="stage-matrix" id="master-scoreboard">
           <thead>
             <tr id="table-header-row">
-              <th class="th-seq">#</th>
+              <th class="th-seq" id="rank-col-header">#</th>
               <th class="th-team">Team Name</th>
               <!-- Dynamic round columns rendered via JS -->
               <th class="th-total">Total Score</th>
@@ -92,7 +93,11 @@
           <span class="eyebrow">CONTROL CENTER</span>
           <h2>Tournament Administration</h2>
         </div>
-        <button id="logout-btn" class="btn btn-danger" type="button">Sign Out</button>
+        <div class="admin-head-actions">
+          <!-- Standings Reveal Toggle is strictly inside Admin Control -->
+          <button id="admin-reveal-btn" class="btn btn-reveal" type="button">🏆 Reveal Standings</button>
+          <button id="logout-btn" class="btn btn-danger" type="button">Sign Out</button>
+        </div>
       </div>
       <div id="admin-status" class="alert-box" hidden></div>
 
@@ -123,7 +128,7 @@
         <div class="admin-sheet-head">
           <div>
             <h3>Live Admin Score Matrix</h3>
-            <p class="muted-note">Directly edit round cells below in registration order. Values auto-calculate row totals and sync to live board (supports formulas like <code>+10</code>, <code>-5</code>).</p>
+            <p class="muted-note">Directly edit round cells below. Values auto-calculate row totals and sync to live board (supports formulas like <code>+10</code>, <code>-5</code>).</p>
           </div>
         </div>
         <div class="table-scroll-frame" style="margin-top: 14px;">
