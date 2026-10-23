@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bible Quiz Championship | Official Live Scoreboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <!-- Stage Broadcast Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <button id="logo-btn" class="logo-btn" type="button" aria-label="Admin Access" title="Admin Login">
+        <img src="logo.png" alt="Church Logo" class="logo-img" id="app-logo" onerror="this.style.display='none'">
+      </button>
+      <div class="header-titles">
+        <div class="live-pill">
+          <span class="pulse-dot"></span> LIVE TOURNAMENT BOARD
+        </div>
+        <h1 class="header-title">Grand Bible Quiz Championship</h1>
+      </div>
+    </div>
+
+    <div class="scripture-bar">
+      <p class="scripture-quote">“Your word is a lamp to my feet and a light to my path.”</p>
+      <span class="scripture-ref">Psalm 119:105</span>
+    </div>
+
+    <div class="header-right">
+      <div class="stat-pill">
+        <span class="stat-label">TEAMS</span>
+        <span id="team-counter" class="stat-val">0</span>
+      </div>
+      <button id="fullscreen-toggle-btn" class="btn btn-primary" type="button" title="Projector Fullscreen (Esc to exit)">
+        ⛶ Fullscreen
+      </button>
+    </div>
+  </header>
+
+  <!-- Master Stage Grid Container -->
+  <main class="grid-stage-wrapper">
+    <div class="matrix-card">
+      <div class="table-scroll-frame">
+        <table class="stage-matrix" id="master-scoreboard">
+          <thead>
+            <tr id="table-header-row">
+              <th class="th-seq">#</th>
+              <th class="th-team">Team Name</th>
+              <!-- Dynamic round columns rendered via JS -->
+              <th class="th-total">Total Score</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body">
+            <tr>
+              <td colspan="3" class="state-cell">Connecting to live tournament data...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Administrator Login Modal -->
+    <div id="login-modal" class="modal-backdrop" hidden>
+      <div class="modal-dialog">
+        <div class="modal-head">
+          <h2>Administrator Sign In</h2>
+          <button id="close-login-btn" class="close-btn" type="button" aria-label="Close">×</button>
+        </div>
+        <form id="admin-login-form" class="modal-form">
+          <div class="field-group">
+            <label for="admin-email">Admin Email</label>
+            <input type="email" id="admin-email" placeholder="admin@domain.com" required autocomplete="username">
+          </div>
+          <div class="field-group">
+            <label for="admin-password">Password</label>
+            <input type="password" id="admin-password" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Authenticate</button>
+          <div id="login-status" class="alert-box" hidden></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tournament Control Center (Admin Only) -->
+    <section id="admin-panel" class="admin-panel" hidden>
+      <div class="admin-panel-head">
+        <div>
+          <span class="eyebrow">CONTROL CENTER</span>
+          <h2>Tournament Administration</h2>
+        </div>
+        <button id="logout-btn" class="btn btn-danger" type="button">Sign Out</button>
+      </div>
+      <div id="admin-status" class="alert-box" hidden></div>
+
+      <div class="admin-row">
+        <!-- Add Team -->
+        <div class="admin-card">
+          <h3>Register Team</h3>
+          <form id="add-team-form" class="inline-form">
+            <input type="text" id="new-team-name" placeholder="Team name" required maxlength="60">
+            <button type="submit" class="btn btn-primary">+ Add</button>
+          </form>
+          <div id="admin-teams-list" class="admin-list"></div>
+        </div>
+
+        <!-- Add Round -->
+        <div class="admin-card">
+          <h3>Create Quiz Round</h3>
+          <form id="add-round-form" class="inline-form">
+            <input type="text" id="new-round-name" placeholder="e.g. Round 1: Gospels" required maxlength="60">
+            <button type="submit" class="btn btn-primary">+ Add</button>
+          </form>
+          <div id="admin-rounds-list" class="admin-list"></div>
+        </div>
+      </div>
+
+      <!-- Live Editable Spreadsheet Matrix for Admin -->
+      <div class="admin-card" style="margin-top: 24px;">
+        <div class="admin-sheet-head">
+          <div>
+            <h3>Live Admin Score Matrix</h3>
+            <p class="muted-note">Directly edit round cells below in registration order. Values auto-calculate row totals and sync to live board (supports formulas like <code>+10</code>, <code>-5</code>).</p>
+          </div>
+        </div>
+        <div class="table-scroll-frame" style="margin-top: 14px;">
+          <table class="stage-matrix admin-matrix" id="admin-matrix-table">
+            <thead>
+              <tr id="admin-table-header-row">
+                <th class="th-seq">#</th>
+                <th class="th-team">Team Name</th>
+                <!-- Dynamic round inputs -->
+                <th class="th-total">Total</th>
+              </tr>
+            </thead>
+            <tbody id="admin-matrix-body">
+              <tr><td colspan="3" class="state-cell">Loading admin matrix...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
